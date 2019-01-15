@@ -1,4 +1,8 @@
-# docker run --rm -d --network tor_default -p 9050 --name mytor tor
+# docker run --rm -d \
+#	--network tor_default \
+#	-p 9050:9050 \
+#	--name mytor \
+#	tor
 
 FROM ubuntu
 
