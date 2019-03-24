@@ -17,9 +17,7 @@ services:
         container_name: deluge_proxy 
         ports: 
             - 8000:80
-        links: 
-            - openvpn:deluge 
-        command: ['-w', "http://deluge:8000/;/"]
+        command: ['-w', "http://openvpn:8000/;/"]
     
     deluge:
         build: ../../deluge/
