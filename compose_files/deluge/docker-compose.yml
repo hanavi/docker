@@ -1,0 +1,33 @@
+---
+version: '3'
+services:
+
+    openvpn:
+        build: ../../vpn/
+        container_name: openvpn
+        volumes: 
+            - /home/james/working/docker/vpn/strong:/openvpn
+        cap_add:
+            - NET_ADMIN 
+        devices: 
+            - "/dev/net/tun"
+
+    deluge_proxy:
+        image: dperson/nginx 
+        container_name: deluge_proxy 
+        ports: 
+            - 8000:80
+        links: 
+            - openvpn:deluge 
+        command: ['-w', "http://deluge:8000/;/"]
+    
+    deluge:
+        build: ../../deluge/
+        container_name: deluge
+        depends_on:
+            - openvpn
+            - deluge_proxy
+        volumes:
+            - /home/james/working/docker/deluge/config:/root/.config/deluge 
+            - /mnt/hosts/docker:/mnt/remote 
+        network_mode: "service:openvpn"
