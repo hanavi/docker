@@ -1,0 +1,7 @@
+docker run \
+    --rm \
+    -it \
+    --net=container:openvpn \
+    -v /home/james/working/docker/deluge/config:/root/.config/deluge \
+    --name deluge \
+    deluge

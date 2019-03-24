@@ -1,0 +1,8 @@
+docker run \
+	--rm \
+	-it \
+	-v /home/james/working/docker/vpn/strong:/openvpn \
+	--cap-add=NET_ADMIN \
+	--device /dev/net/tun \
+	--name openvpn \
+	openvpn
